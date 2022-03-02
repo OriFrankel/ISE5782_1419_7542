@@ -5,7 +5,7 @@ package primitives;
 
 /**
  * vector in the space
- * @author ori frankel, yair sprecher
+ * @author ori frankel and yair sprecher
  *
  */
 public class Vector extends Point {
