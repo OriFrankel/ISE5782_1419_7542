@@ -2,11 +2,8 @@
  * 
  */
 package primitives;
-
-import java.util.Vector;
-
 /**
- * @author ofrankel
+ * @author Ori Frankel, Yair Sprecher
  * point in the space
  */
 public class Point {
@@ -45,7 +42,7 @@ public class Point {
 	 * @return the sum
 	 */
 	public Point add(Vector vector) {
-		return new Point(xyz.add(vector.xyz));
+		return new Point(this.xyz.add(vector.xyz));
 	}
 	/**
 	 * subtract point from point
@@ -54,5 +51,11 @@ public class Point {
 	 */
 	public Vector subtract(Point point) {
 		return new Vector(xyz.subtract(point.xyz));
+	}
+	public double distanceSquared(Point other) {
+		return subtract(other).lengthSquared();
+	}
+	public double distance(Point other) {
+		return Math.sqrt(distanceSquared(other));
 	}
 }
