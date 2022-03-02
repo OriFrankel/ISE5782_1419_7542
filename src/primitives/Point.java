@@ -3,8 +3,9 @@
  */
 package primitives;
 /**
- * @author Ori Frankel, Yair Sprecher
  * point in the space
+ * @author Ori Frankel, Yair Sprecher
+ * 
  */
 public class Point {
 	/**
@@ -52,9 +53,19 @@ public class Point {
 	public Vector subtract(Point point) {
 		return new Vector(xyz.subtract(point.xyz));
 	}
+	/**
+	 * the distance from another point,squared
+	 * @param other another point
+	 * @return the distance squared
+	 */
 	public double distanceSquared(Point other) {
 		return subtract(other).lengthSquared();
 	}
+	/**
+	 * the distance from another point
+	 * @param other another point
+	 * @return the distance 
+	 */
 	public double distance(Point other) {
 		return Math.sqrt(distanceSquared(other));
 	}

@@ -1,15 +1,32 @@
 package primitives;
-
+/**
+ * ray in the space
+ * @author Ori Frankel, Yair Sprecher
+ *
+ */
 public class Ray {
 	final Point p0;
 	final Vector dir;
+	/**
+	 * constructor
+	 * @param p the start point
+	 * @param v the direction
+	 */
 	public Ray(Point p, Vector v) {
 		p0 = p;
 		dir = v.normalize();
 	}
+	/**
+	 * getter for Dir
+	 * @return Dir
+	 */
 	public Vector getDir() {
 		return dir;
 	}
+	/**
+	 * getter for p0
+	 * @return p0
+	 */
 	public Point getP0() {
 		return p0;
 	}
