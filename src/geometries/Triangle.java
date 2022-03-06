@@ -1,8 +1,10 @@
 package geometries;
 
 import primitives.Point;
+
 /**
  * triangle on the space
+ * 
  * @author ori frankel and yair sprecher
  *
  */
