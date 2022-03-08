@@ -14,7 +14,7 @@ public class Sphere implements Geometry {
 	double radius;
 
 	/**
-	 * constructor
+	 * constructor for sphere gets center and radius
 	 * 
 	 * @param center the center
 	 * @param radius the radius

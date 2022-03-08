@@ -1,11 +1,11 @@
 package geometries;
+
+import primitives.Point;
+import primitives.Vector;
 /**
  * plane in the space
  * @author ori frankel and yair sprecher
  */
-import primitives.Point;
-import primitives.Vector;
-
 public class Plane implements Geometry {
 	Point p0;
 	Vector normal;

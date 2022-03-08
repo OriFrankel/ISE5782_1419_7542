@@ -11,7 +11,7 @@ package primitives;
  */
 public class Vector extends Point {
 	/**
-	 * constructor
+	 * constructor for vector gets 3 coordinates
 	 * 
 	 * @param d1 the first coordinate of endpoint
 	 * @param d2 the second coordinate of endpoint
@@ -22,7 +22,10 @@ public class Vector extends Point {
 		if (xyz.equals(Double3.ZERO))
 			throw new IllegalArgumentException("Zero vector\n");
 	}
-
+/**
+ * constructor for vector gets double3
+ * @param xyz the double3
+ */
 	Vector(Double3 xyz) {
 		super(xyz);
 		if (xyz.equals(Double3.ZERO))

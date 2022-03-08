@@ -12,7 +12,7 @@ public class Cylinder extends Tube {
 	double height;
 
 	/**
-	 * 
+	 * constructor for Cylinder gets axis,radius and height
 	 * @param ray    the axis
 	 * @param radius the radius
 	 * @param height the height

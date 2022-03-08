@@ -11,11 +11,11 @@ import primitives.Ray;
  *
  */
 public class Tube implements Geometry {
-	Ray axisRay;
-	double radius;
+	protected final Ray axisRay;
+	protected final double radius;
 
 	/**
-	 * constructor
+	 * constructor for Tube gets axis ray and radius
 	 * 
 	 * @param ray the axis
 	 * @param d   the radius

@@ -8,7 +8,7 @@ public class Ray {
 	final Point p0;
 	final Vector dir;
 	/**
-	 * constructor
+	 * constructor, for Ray, gets start point and direction
 	 * @param p the start point
 	 * @param v the direction
 	 */
