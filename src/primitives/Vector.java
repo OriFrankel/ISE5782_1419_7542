@@ -56,7 +56,7 @@ public class Vector extends Point {
 	 * @return the sum
 	 */
 	public Vector add(Vector v) {
-		return (Vector) super.add(v);
+		return new Vector(super.add(v).xyz);
 	}
 
 	/**

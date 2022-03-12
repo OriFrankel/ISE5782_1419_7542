@@ -46,4 +46,33 @@ class PointTests {
         // the difference equals 0
     	assertThrows(IllegalArgumentException.class, () -> p1.subtract(p1), "point subtract wrong result when the difference is zero");
     }
+    /**
+     * Test method for {@link primitives.Point#distanceSquared(primitives.Point)}.
+     */
+    @Test
+    public void testDistanceSquared() {
+    	// ============ Equivalence Partitions Tests ==============
+    	// some point and some point
+    	Point p1 = new Point(1, 2, 3);
+    	Point p2 = new Point(1, 0, 2);
+    	assertEquals(p1.distanceSquared(p2),5,0.0000000000001, "point distanceSquared wrong result");
+        // =============== Boundary Values Tests ==================
+        // equal points
+    	assertEquals(p1.distanceSquared(p1),0,0.0000000000001, "point distanceSquared wrong result when points are equal");
+    	
+    }
+    /**
+     * Test method for {@link primitives.Point#distance(primitives.Point)}.
+     */
+    @Test
+    public void testDistance() {
+    	// ============ Equivalence Partitions Tests ==============
+    	// some point and some point
+    	Point p1 = new Point(3, 2, 3);
+    	Point p2 = new Point(1, 0, 2);
+    	assertEquals(p1.distance(p2),3,0.0000000000001, "point distance wrong result");
+        // =============== Boundary Values Tests ==================
+        // equal points
+    	assertEquals(p1.distanceSquared(p1),0,0.0000000000001, "point distance wrong result when points are equal");
+    }
 }
