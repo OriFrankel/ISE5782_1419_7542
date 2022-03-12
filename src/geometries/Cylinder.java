@@ -1,6 +1,8 @@
 package geometries;
 
+import primitives.Point;
 import primitives.Ray;
+import primitives.Vector;
 
 /**
  * finite cylinder
@@ -21,7 +23,6 @@ public class Cylinder extends Tube {
 		super(ray, radius);
 		this.height = height;
 	}
-
 	/**
 	 * getter for height
 	 * 
@@ -30,9 +31,23 @@ public class Cylinder extends Tube {
 	public double getHeight() {
 		return height;
 	}
-
 	@Override
 	public String toString() {
 		return super.toString() + " height: " + ((Double) height).toString();
+	}
+	@Override
+	public Vector getNormal(Point p) {
+		if (p.equals(axisRay.getP0())) {
+			return axisRay.getDir().scale(-1);
+		}
+		Vector v = p.subtract(axisRay.getP0());
+		double d = v.dotProduct(axisRay.getDir());
+		if (primitives.Util.isZero(d)) {
+			return axisRay.getDir().scale(-1);
+		}
+		if (primitives.Util.isZero(d - height)) {
+			return axisRay.getDir();
+		}
+		return super.getNormal(p);
 	}
 }

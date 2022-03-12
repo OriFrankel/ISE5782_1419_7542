@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 import primitives.Util;
 import primitives.Vector;
 
+/**
+ * Testing Vector
+ * 
+ * @author Ori Frankel, Yair Sprecher
+ *
+ */
 class VectorTest {
 	/**
      * Test method for {@link primitives.Vector#add(primitives.Vector)}.

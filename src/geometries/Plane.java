@@ -10,7 +10,7 @@ public class Plane implements Geometry {
 	Point p0;
 	Vector normal;
 	/**
-	 * 
+	 * constructor for Plane, gets point and normal
 	 * @param p0 point on the plane
 	 * @param normal normal to the plane
 	 */
@@ -19,7 +19,7 @@ public class Plane implements Geometry {
 		this.normal=normal.normalize();
 	}
 	/**
-	 * constructor
+	 * constructor for Plane, gets three points
 	 * @param p1 point on the plane
 	 * @param p2 point on the plane
 	 * @param p3 point on the plane
