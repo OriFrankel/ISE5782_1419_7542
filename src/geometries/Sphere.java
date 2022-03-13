@@ -10,8 +10,8 @@ import primitives.Vector;
  *
  */
 public class Sphere implements Geometry {
-	Point center;
-	double radius;
+	private final Point center;
+	private final double radius;
 
 	/**
 	 * constructor for sphere gets center and radius

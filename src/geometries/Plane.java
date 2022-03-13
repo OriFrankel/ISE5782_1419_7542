@@ -10,8 +10,8 @@ import primitives.Vector;
  * @author ori frankel and yair sprecher
  */
 public class Plane implements Geometry {
-	Point p0;
-	Vector normal;
+	private final Point p0;
+	private final Vector normal;
 	/**
 	 * constructor for Plane, gets point and normal
 	 * @param p0 point on the plane
@@ -39,7 +39,7 @@ public class Plane implements Geometry {
 	}
 	@Override
 	public Vector getNormal(Point p) {
-		return getNormal();
+		return normal;
 	}
 	/**
 	 * getter for p0

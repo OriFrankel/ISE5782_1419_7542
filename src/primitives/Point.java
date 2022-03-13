@@ -13,7 +13,7 @@ public class Point {
 	/**
 	 * the coordinates
 	 */
-	final Double3 xyz;
+	final protected Double3 xyz;
 
 	Point(Double3 xyz) {
 		this.xyz = xyz;

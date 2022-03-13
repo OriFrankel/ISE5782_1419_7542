@@ -11,7 +11,7 @@ import primitives.Vector;
  *
  */
 public class Cylinder extends Tube {
-	double height;
+	private final double height;
  
 	/**
 	 * constructor for Cylinder gets axis,radius and height
