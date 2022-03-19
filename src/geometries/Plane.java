@@ -1,9 +1,9 @@
 package geometries;
 
 import java.util.List;
-
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
 import primitives.Vector;
 /**
  * plane in the space
@@ -48,7 +48,19 @@ public class Plane implements Geometry {
 	public Point getP0() {
 		return p0;
 	}
-	public List<Point> findintersections(Ray ray){
-		return null;
+	@Override
+	public List<Point> findIntersections(Ray ray){
+		if (p0.equals(ray.getP0()))
+			return null;
+		Vector v = p0.subtract(ray.getP0());
+		double d1 = normal.dotProduct(v);
+		double d2 = normal.dotProduct(ray.getDir());
+		if (Util.isZero(d1) || Util.isZero(d2))
+			return null;
+		double t = d1 / d2;
+		if (primitives.Util.alignZero(t) > 0)
+			return List.of(ray.getPoint(t));
+		else
+			return null;
 	}
 }

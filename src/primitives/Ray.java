@@ -45,4 +45,14 @@ public class Ray {
 	public String toString() {
 		return p0.toString() + dir.toString();
 	}
+	/**
+	 * return point by the length of the ray till the point
+	 * @param d length till the point
+	 * @return the point
+	 */
+	public Point getPoint(double d) {
+		if (Util.isZero(d))
+			return p0;
+		return p0.add(dir.scale(d));
+	}
 }

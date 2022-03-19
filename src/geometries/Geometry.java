@@ -9,7 +9,7 @@ import primitives.Point;
  * @author ori frankel and yair sprecher
  *
  */
-public interface Geometry {
+public interface Geometry extends Intersectable {
 	/**
 	 * normal on a point in the geometry
 	 * @param p the point
