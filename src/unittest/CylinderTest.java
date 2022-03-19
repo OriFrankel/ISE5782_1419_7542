@@ -22,7 +22,7 @@ class CylinderTest {
 	@Test
 	void testGetNormal() {
     	// ============ Equivalence Partitions Tests ==============
-		// the point is on surface
+		//TC01: the point is on surface
 		Point begin = new Point(0, 0, 0);
 		Vector direction = new Vector(1, 0, 0);
 		Ray ray = new Ray(begin, direction);
@@ -30,20 +30,20 @@ class CylinderTest {
 		Point p = new Point(1, 1, 0);
 		Vector v = new Vector(0, 1, 0);
 		assertEquals(cylinder.getNormal(p), v, "Cylinder getNormal() wrong result when the point is on the surface");
-		// the point is on the first base
+		//TC02: the point is on the first base
 		v = new Vector(-1, 0, 0);
 		p = new Point(0, 0, 0.5);
 		assertEquals(cylinder.getNormal(p), v, "Cylinder getNormal() wrong result when the point is on the first base");
-		// the point is on the second base
+		//TC03: the point is on the second base
 		v = new Vector(1, 0, 0);
 		p = new Point(2, 0, 0.5);
 		assertEquals(cylinder.getNormal(p), v, "Cylinder getNormal() wrong result when the point is on the second base");
         // =============== Boundary Values Tests ==================
-        // the point is at the center of the first base
+        //TC10: the point is at the center of the first base
 		v = new Vector(-1, 0, 0);
 		p = new Point(0, 0, 0);
 		assertEquals(cylinder.getNormal(p), v, "Cylinder getNormal() wrong result when the point is at the center of the first base");
-		// the point is at the center of the second base
+		//TC11: the point is at the center of the second base
 		v = new Vector(1, 0, 0);
 		p = new Point(2, 0, 0);
 		assertEquals(cylinder.getNormal(p), v, "Cylinder getNormal() wrong result when the point is at the center of the second base");

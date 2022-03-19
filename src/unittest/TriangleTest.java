@@ -24,7 +24,7 @@ class TriangleTest {
 		Point p3=new Point(37,52,11);
 		Triangle t=new Triangle(p1,p2,p3);
 		// ============ Equivalence Partitions Tests ==============
-		//some Triangle
+		//TC01: some Triangle
 		Vector v=t.getNormal(p1);
 		assertEquals(v.dotProduct(p2.subtract(p1)),0,0.0000001,"Triangle getNormal wrong result - doesn't orthogonal to vector in the plane");
 		assertEquals(v.dotProduct(p3.subtract(p1)),0,0.0000001,"Triangle getNormal wrong result - doesn't orthogonal to vector in the plane");

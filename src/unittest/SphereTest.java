@@ -19,7 +19,7 @@ class SphereTest {
 	@Test
 	void testGetNormal() {
 		// ============ Equivalence Partitions Tests ==============
-		//some point
+		//TC01: some point
 		double radius = 2;
 		Point center = new Point(0, 0, 0);
 		Point p = new Point(2, 0, 0);

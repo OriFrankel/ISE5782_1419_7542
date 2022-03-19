@@ -18,6 +18,7 @@ class TubeTest {
 	@Test
 	void testGetNormal() {
     	// ============ Equivalence Partitions Tests ==============
+		//TC01: some Tube and some point on it
 		Point begin = new Point(0, 0, 0);
 		Vector direction = new Vector(1, 0, 0);
 		Ray ray = new Ray(begin, direction);
@@ -26,7 +27,7 @@ class TubeTest {
 		Vector v = new Vector(0, 1, 0);
 		assertEquals(tube.getNormal(p), v, "Tube getNormal() wrong result");
         // =============== Boundary Values Tests ==================
-        // the point on the surface is perpendicular to the ray
+        //TC10: the line from point on the surface to the start of the ray is perpendicular to the ray
 		p = new Point(0, 1, 0);
 		assertEquals(tube.getNormal(p), v, "Tube getNormal() wrong result when the point on the surface is perpendicular to the ray");
 	}
