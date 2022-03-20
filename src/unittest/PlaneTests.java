@@ -2,7 +2,6 @@ package unittest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.invoke.WrongMethodTypeException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;

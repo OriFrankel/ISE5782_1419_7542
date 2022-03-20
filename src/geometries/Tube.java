@@ -2,9 +2,8 @@ package geometries;
 
 import java.util.List;
 
-import primitives.Point;
-import primitives.Vector;
-import primitives.Ray;
+import primitives.*;
+import static primitives.Util.*;
 
 /**
  * infinite tube
@@ -30,12 +29,8 @@ public class Tube implements Geometry {
 	@Override
 	public Vector getNormal(Point p) {
 		Vector v = p.subtract(axisRay.getP0());
-		try {
-			Vector vector=axisRay.getDir();
-			return v.subtract(vector.scale(vector.dotProduct(v))).normalize();
-		} catch(IllegalArgumentException e) {
-			return v.normalize();
-		}
+		Point o = axisRay.getPoint(axisRay.getDir().dotProduct(v));
+		return p.subtract(o).normalize();
 	}
 
 	/**
@@ -60,8 +55,9 @@ public class Tube implements Geometry {
 	public String toString() {
 		return axisRay.toString() + " and radius: " + ((Double) radius).toString();
 	}
+
 	@Override
-	public List<Point> findIntersections(Ray ray){
+	public List<Point> findIntersections(Ray ray) {
 		return null;
 	}
 }
