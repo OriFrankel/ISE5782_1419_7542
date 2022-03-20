@@ -1,10 +1,8 @@
 package geometries;
 
 import java.util.List;
-import primitives.Point;
-import primitives.Ray;
-import primitives.Util;
-import primitives.Vector;
+import primitives.*;
+import static primitives.Util.*;
 
 /**
  * sphere in the space
@@ -22,7 +20,7 @@ public class Sphere implements Geometry {
 	 * @param center the center
 	 * @param radius the radius
 	 */
-	public Sphere(double radius,Point center) {
+	public Sphere(double radius, Point center) {
 		this.center = center;
 		this.radius = radius;
 	}
@@ -54,21 +52,23 @@ public class Sphere implements Geometry {
 	public String toString() {
 		return "Sphere with center " + center.toString() + " and radius " + ((Double) radius).toString();
 	}
+
 	@Override
-	public List<Point> findIntersections(Ray ray){
-		if (ray.getP0().equals(center))
+	public List<Point> findIntersections(Ray ray) {
+		Point p0 = ray.getP0();
+		if (p0.equals(center))
 			return List.of(ray.getPoint(radius));
-		Vector u = center.subtract(ray.getP0());
+		Vector u = center.subtract(p0);
 		double tm = ray.getDir().dotProduct(u);
-		double d = u.lengthSquared() - tm * tm;
-		double temp = radius * radius - d;
+		double d2 = u.lengthSquared() - tm * tm;
+		double temp = radius * radius - d2;
 		if (Util.alignZero(temp) <= 0)
 			return null;
 		double th = Math.sqrt(temp);
-		if (Util.alignZero(tm - th) > 0)
-			return List.of(ray.getPoint(tm - th), ray.getPoint(tm + th));
-		if (Util.alignZero(tm + th) > 0)
-			return List.of(ray.getPoint(tm + th));
-		return null;
+		double t2 = alignZero(tm + th);
+		if (t2 <= 0)
+			return null;
+		double t1 = alignZero(tm - th);
+		return t1 <= 0 ? List.of(ray.getPoint(t2)) : List.of(ray.getPoint(t1), ray.getPoint(t2));
 	}
 }
