@@ -47,5 +47,13 @@ class CylinderTest {
 		v = new Vector(1, 0, 0);
 		p = new Point(2, 0, 0);
 		assertEquals(cylinder.getNormal(p), v, "Cylinder getNormal() wrong result when the point is at the center of the second base");
+		//TC12: the point is on the edge of the first base
+		v=new Vector(-1,0,0);
+		p=new Point(0,1,0);
+		assertEquals(cylinder.getNormal(p), v, "Cylinder getNormal() wrong result when the point is on the edge of the first base");
+		//TC12: the point is on the edge of the second base
+		v=new Vector(1,0,0);
+		p=new Point(2,1,0);
+		assertEquals(cylinder.getNormal(p), v, "Cylinder getNormal() wrong result when the point is on the edge of the second base");
 	}
 }

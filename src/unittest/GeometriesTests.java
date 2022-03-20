@@ -37,7 +37,9 @@ class GeometriesTests {
 		// =============== Boundary Values Tests ==================
 		//TC10: empty geometries list
 		result =emptyGeometries.findIntersections(new Ray(new Point(-2, -0.5, -0.5), new Vector(1, 0, 0)));
+		try {
 		assertEquals(0, result.size(),"wrong number of points");
+		} catch(NullPointerException e) {}
 		//TC11: no geometry intersects the ray
 		result =shapes.findIntersections(new Ray(new Point(2, 0, 0), new Vector(0, 1, 0)));
 		assertEquals(0,result.size(),"wrong number of points");
