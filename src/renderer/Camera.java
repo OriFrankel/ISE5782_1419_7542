@@ -49,11 +49,25 @@ public class Camera {
 	 * construct ray from the camera through a pixel, given its place 
 	 * @param nX amount of columns
 	 * @param nY amount of rows
-	 * @param j the row of the pixel (1<=i<=nY)
-	 * @param i the column of the pixel (1<=i<=nX)
+	 * @param j the column of the pixel (0 <= j < nX)
+	 * @param i the row of the pixel (0 <= i < nY)
 	 * @return the ray through the pixel
 	 */
 	public Ray constructRay(int nX, int nY, int j, int i) {
-		return null;
+		Point P;
+		try {
+			P=location.add(vto.scale(VPdistance)); 
+		}catch(IllegalArgumentException e) {
+			P=location;
+		}
+		double y=-(i-(nY-1d)/2)*VPheight;
+		double x=-(j-(nX-1d)/2)*VPwidth;
+		if(!isZero(x))P=P.add(vright.scale(x));
+		if(!isZero(y))P=P.add(vup.scale(y));
+		try {
+			return new Ray(location,P.subtract(location));
+		}catch(IllegalArgumentException e) {
+			return new Ray(location,vto);
+		}
 	}
 }
