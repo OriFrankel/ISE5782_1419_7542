@@ -60,8 +60,8 @@ public class Camera {
 		}catch(IllegalArgumentException e) {
 			P=location;
 		}
-		double y=-(i-(nY-1d)/2)*VPheight;
-		double x=-(j-(nX-1d)/2)*VPwidth;
+		double y=-(i-(nY-1d)/2)*VPheight/nY;
+		double x=(j-(nX-1d)/2)*VPwidth/nX;
 		if(!isZero(x))P=P.add(vright.scale(x));
 		if(!isZero(y))P=P.add(vup.scale(y));
 		try {
@@ -69,5 +69,12 @@ public class Camera {
 		}catch(IllegalArgumentException e) {
 			return new Ray(location,vto);
 		}
+	}
+	/**
+	 * setter for location
+	 * @param location location of the camera
+	 */
+	public void setLocation(Point location) {
+		this.location = location;
 	}
 }
