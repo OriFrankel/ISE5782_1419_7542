@@ -15,6 +15,11 @@ public class Point {
 	 */
 	final protected Double3 xyz;
 
+	/**
+	 * Center of coordinates' point
+	 */
+	public static final Point ZERO = new Point(Double3.ZERO);
+	
 	Point(Double3 xyz) {
 		this.xyz = xyz;
 	}

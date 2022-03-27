@@ -7,14 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 
-import geometries.Geometries;
-import geometries.Intersectable;
-import geometries.Plane;
-import geometries.Sphere;
-import geometries.Triangle;
-import primitives.Point;
-import primitives.Ray;
-import primitives.Vector;
+import geometries.*;
+import primitives.*;
+
 /**
  * tests for class geometries
  * @author ori frankel and yair sprecher
