@@ -22,10 +22,12 @@ public class Vector extends Point {
 		if (xyz.equals(Double3.ZERO))
 			throw new IllegalArgumentException("Zero vector\n");
 	}
-/**
- * constructor for vector gets double3
- * @param xyz the double3
- */
+
+	/**
+	 * constructor for vector gets double3
+	 * 
+	 * @param xyz the double3
+	 */
 	Vector(Double3 xyz) {
 		super(xyz);
 		if (xyz.equals(Double3.ZERO))

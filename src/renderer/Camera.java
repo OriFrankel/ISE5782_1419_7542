@@ -12,7 +12,7 @@ import static primitives.Util.*;
 public class Camera {
 	private Point location;
 	private Vector vto, vup, vright;
-	double VPwidth, VPheight, VPdistance;
+	double viewPlaneWidth, viewPlaneHeight, viewPlaneDistance;
 
 	/**
 	 * Constructor for camera,gets location and direction vectors
@@ -27,7 +27,7 @@ public class Camera {
 		location = loc;
 		this.vto = vto.normalize();
 		this.vup = vup.normalize();
-		this.vright = vto.crossProduct(vup);
+		this.vright = this.vto.crossProduct(this.vup);
 	}
 
 	/**
@@ -38,19 +38,20 @@ public class Camera {
 	 * @return the resulting camera
 	 */
 	public Camera setVPSize(double width, double height) {
-		VPwidth = width;
-		VPheight = height;
+		viewPlaneWidth = width;
+		viewPlaneHeight = height;
 		return this;
 	}
 
 	/**
 	 * setter for distance of view plane
 	 * 
-	 * @param distance the distance
 	 * @return the resulting camera
 	 */
 	public Camera setVPDistance(double distance) {
-		VPdistance = distance;
+		if (isZero(distance))
+			throw new IllegalArgumentException();
+		viewPlaneDistance = distance;
 		return this;
 	}
 
@@ -64,20 +65,17 @@ public class Camera {
 	 * @return the ray through the pixel
 	 */
 	public Ray constructRay(int nX, int nY, int j, int i) {
-		Point P;
-		try {
-			P = location.add(vto.scale(VPdistance));
-		} catch (IllegalArgumentException e) {
-			P = location;
-		}
-		double y = -(i - (nY - 1d) / 2) * VPheight / nY;
-		double x = (j - (nX - 1d) / 2) * VPwidth / nX;
+		Point p;
+		p = location.add(vto.scale(viewPlaneDistance));
+
+		double y = ((nY - 1.0) / 2 - i) * viewPlaneHeight / nY;
+		double x = (j - (nX - 1.0) / 2) * viewPlaneWidth / nX;
 		if (!isZero(x))
-			P = P.add(vright.scale(x));
+			p = p.add(vright.scale(x));
 		if (!isZero(y))
-			P = P.add(vup.scale(y));
+			p = p.add(vup.scale(y));
 		try {
-			return new Ray(location, P.subtract(location));
+			return new Ray(location, p.subtract(location));
 		} catch (IllegalArgumentException e) {
 			return new Ray(location, vto);
 		}

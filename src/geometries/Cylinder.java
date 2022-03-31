@@ -12,9 +12,10 @@ import primitives.Vector;
  */
 public class Cylinder extends Tube {
 	private final double height;
- 
+
 	/**
 	 * constructor for Cylinder gets axis,radius and height
+	 * 
 	 * @param ray    the axis
 	 * @param radius the radius
 	 * @param height the height
@@ -23,6 +24,7 @@ public class Cylinder extends Tube {
 		super(ray, radius);
 		this.height = height;
 	}
+
 	/**
 	 * getter for height
 	 * 
@@ -31,10 +33,12 @@ public class Cylinder extends Tube {
 	public double getHeight() {
 		return height;
 	}
+
 	@Override
 	public String toString() {
 		return super.toString() + " height: " + ((Double) height).toString();
 	}
+
 	@Override
 	public Vector getNormal(Point p) {
 		if (p.equals(axisRay.getP0())) {

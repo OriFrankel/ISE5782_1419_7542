@@ -15,6 +15,7 @@ import primitives.Util;
 public class Triangle extends Polygon {
 	/**
 	 * constructor for triangle gets 3 points ,the vertices of the triangle
+	 * 
 	 * @param p1 first point
 	 * @param p2 second point
 	 * @param p3 third point
@@ -22,8 +23,9 @@ public class Triangle extends Polygon {
 	public Triangle(Point p1, Point p2, Point p3) {
 		super(p1, p2, p3);
 	}
+
 	@Override
-	public List<Point> findIntersections(Ray ray){
+	public List<Point> findIntersections(Ray ray) {
 		List<Point> list = plane.findIntersections(ray);
 		if (list == null)
 			return null;
@@ -38,7 +40,7 @@ public class Triangle extends Polygon {
 		double x2 = p2.getX() - p0.getX();
 		double y2 = p2.getY() - p0.getY();
 		double det = x1 * y2 - y1 * x2;
-		if(Util.isZero(det)) {
+		if (Util.isZero(det)) {
 			x = point.getZ() - p0.getZ();
 			y = point.getY() - p0.getY();
 			x1 = p1.getZ() - p0.getZ();
@@ -47,7 +49,7 @@ public class Triangle extends Polygon {
 			y2 = p2.getY() - p0.getY();
 			det = x1 * y2 - y1 * x2;
 		}
-		if(Util.isZero(det)) {
+		if (Util.isZero(det)) {
 			x = point.getZ() - p0.getZ();
 			y = point.getX() - p0.getX();
 			x1 = p1.getX() - p0.getX();
@@ -56,9 +58,9 @@ public class Triangle extends Polygon {
 			y2 = p2.getX() - p0.getX();
 			det = x1 * y2 - y1 * x2;
 		}
-		double a = (x*y2-y*x2)/det;
-		double b = (x1*y-x*y1)/det;
-		if (Util.alignZero(a) > 0 && Util.alignZero(b) > 0 && Util.alignZero(1-a-b) > 0)
+		double a = (x * y2 - y * x2) / det;
+		double b = (x1 * y - x * y1) / det;
+		if (Util.alignZero(a) > 0 && Util.alignZero(b) > 0 && Util.alignZero(1 - a - b) > 0)
 			return list;
 		return null;
 	}

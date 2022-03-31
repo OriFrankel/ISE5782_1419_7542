@@ -12,6 +12,7 @@ import primitives.Point;
 public interface Geometry extends Intersectable {
 	/**
 	 * normal on a point in the geometry
+	 * 
 	 * @param p the point
 	 * @return the normal
 	 */

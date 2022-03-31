@@ -19,8 +19,13 @@ public class Point {
 	 * Center of coordinates' point
 	 */
 	public static final Point ZERO = new Point(Double3.ZERO);
-	
-	Point(Double3 xyz) {
+
+	/**
+	 * initalize using double3
+	 * 
+	 * @param xyz the double3
+	 */
+	protected Point(Double3 xyz) {
 		this.xyz = xyz;
 	}
 
@@ -35,18 +40,33 @@ public class Point {
 		xyz = new Double3(d1, d2, d3);
 	}
 
+	/**
+	 * getter for the x coordinate
+	 * 
+	 * @return x coordinate
+	 */
 	public double getX() {
 		return xyz.d1;
 	}
-	
+
+	/**
+	 * getter for the y coordinate
+	 * 
+	 * @return y coordinate
+	 */
 	public double getY() {
 		return xyz.d2;
 	}
-	
+
+	/**
+	 * getter for the z coordinate
+	 * 
+	 * @return z coordinate
+	 */
 	public double getZ() {
 		return xyz.d3;
 	}
-	
+
 	@Override
 	public boolean equals(Object arg0) {
 		if (arg0 == this)
@@ -91,7 +111,8 @@ public class Point {
 	 * @return the distance squared
 	 */
 	public double distanceSquared(Point other) {
-		return (xyz.d1-other.xyz.d1)*(xyz.d1-other.xyz.d1)+(xyz.d2-other.xyz.d2)*(xyz.d2-other.xyz.d2)+(xyz.d3-other.xyz.d3)*(xyz.d3-other.xyz.d3);
+		return (xyz.d1 - other.xyz.d1) * (xyz.d1 - other.xyz.d1) + (xyz.d2 - other.xyz.d2) * (xyz.d2 - other.xyz.d2)
+				+ (xyz.d3 - other.xyz.d3) * (xyz.d3 - other.xyz.d3);
 	}
 
 	/**

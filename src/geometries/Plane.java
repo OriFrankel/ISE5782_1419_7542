@@ -70,7 +70,7 @@ public class Plane implements Geometry {
 		double denominator = normal.dotProduct(ray.getDir());
 		if (isZero(denominator))
 			return null;
-		
+
 		double t = normal.dotProduct(v) / denominator;
 		return alignZero(t) > 0 ? List.of(ray.getPoint(t)) : null;
 	}
