@@ -11,7 +11,7 @@ public class Geometries implements Intersectable {
 	private final List<Intersectable> geometries;
 
 	public Geometries() {
-		geometries = null;
+		geometries = new LinkedList<Intersectable>();
 	}
 
 	public Geometries(Intersectable... geometries) {

@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 /**
  * ray in the space
  * 
@@ -64,5 +66,23 @@ public class Ray {
 	 */
 	public Point getPoint(double d) {
 		return Util.isZero(d) ? p0 : p0.add(dir.scale(d));
+	}
+	/**
+	 * find the closest point to the start of the ray
+	 * @param list list of points
+	 * @return the closest point
+	 */
+	public Point findClosestPoint(List<Point> list) {
+		if(list==null)return null;
+		Point point=null;
+		double dist2=Double.POSITIVE_INFINITY; 
+		for(Point p2:list) {
+			double d=p2.distanceSquared(p0);
+			if(d<dist2) {
+				point=p2;
+				dist2=d;
+			}
+		}
+		return point;
 	}
 }
