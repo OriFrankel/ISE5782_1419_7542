@@ -6,7 +6,6 @@ import static primitives.Util.*;
 
 import java.util.MissingResourceException;
 
-
 /**
  * the camera for making pictures
  * 
@@ -18,6 +17,7 @@ public class Camera {
 	double viewPlaneWidth, viewPlaneHeight, viewPlaneDistance;
 	private ImageWriter imageWriter;
 	private RayTracerBase rayTracer;
+
 	/**
 	 * Constructor for camera,gets location and direction vectors
 	 * 
@@ -58,24 +58,24 @@ public class Camera {
 		viewPlaneDistance = distance;
 		return this;
 	}
-	
+
 	/**
 	 * setter for rayTracerBase
 	 * 
 	 * @return the resulting camera
 	 */
 	public Camera setImageWriter(ImageWriter imageWriter) {
-		this.imageWriter=imageWriter;
+		this.imageWriter = imageWriter;
 		return this;
 	}
-	
+
 	/**
 	 * setter for ray Tracer
 	 * 
 	 * @return the resulting camera
 	 */
 	public Camera setRayTracer(RayTracerBase rayTracer) {
-		this.rayTracer=rayTracer;
+		this.rayTracer = rayTracer;
 		return this;
 	}
 
@@ -113,36 +113,44 @@ public class Camera {
 	public void setLocation(Point location) {
 		this.location = location;
 	}
+
 	/**
 	 * render the image
 	 */
 	public void renderImage() {
-		if(location==null||vto==null||vup==null||vright==null||isZero(viewPlaneDistance)||imageWriter==null||rayTracer==null)
-			throw new MissingResourceException("", "","");
-		for(int i=0;imageWriter.getNx()>i;++i)
-			for(int j=0;imageWriter.getNy()>j;++j)
+		if (location == null || vto == null || vup == null || vright == null || isZero(viewPlaneDistance)
+				|| imageWriter == null || rayTracer == null)
+			throw new MissingResourceException("", "", "");
+		for (int i = 0; imageWriter.getNx() > i; ++i)
+			for (int j = 0; imageWriter.getNy() > j; ++j)
 				imageWriter.writePixel(i, j, castRay(i, j));
 	}
+
 	/**
 	 * print grid to the image
+	 * 
 	 * @param interval size of the grid in pixles
-	 * @param color color of the grid
+	 * @param color    color of the grid
 	 */
 	public void printGrid(int interval, Color color) {
-		if(imageWriter==null)throw new MissingResourceException("", "","");
-		for(int i=0;imageWriter.getNx()>i;++i)
-			for(int j=0;imageWriter.getNy()>j;++j)
-				if(i%(interval*2)==interval||j%(interval*2)==interval)
+		if (imageWriter == null)
+			throw new MissingResourceException("", "", "");
+		for (int i = 0; imageWriter.getNx() > i; ++i)
+			for (int j = 0; imageWriter.getNy() > j; ++j)
+				if (i % (interval * 2) == interval || j % (interval * 2) == interval)
 					imageWriter.writePixel(i, j, color);
 	}
+
 	/**
 	 * create png image
 	 */
 	public void writeToImage() {
-		if(imageWriter==null)throw new MissingResourceException("", "","");
+		if (imageWriter == null)
+			throw new MissingResourceException("", "", "");
 		imageWriter.writeToImage();
 	}
-	private Color castRay(int i,int j) {
-		return rayTracer.traceRay(constructRay(imageWriter.getNx(),imageWriter.getNy(),i, j));
+
+	private Color castRay(int i, int j) {
+		return rayTracer.traceRay(constructRay(imageWriter.getNx(), imageWriter.getNy(), i, j));
 	}
 }
