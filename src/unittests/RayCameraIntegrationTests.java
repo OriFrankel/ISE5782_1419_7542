@@ -17,7 +17,9 @@ class RayCameraIntegrationTests {
 		int count = 0;
 		for (int i = 0; ny > i; ++i)
 			for (int j = 0; nx > j; ++j)
-				count += geometries.findIntersections(camera.constructRay(nx, ny, j, i)).size();
+				try {
+					count += geometries.findGeoIntersections(camera.constructRay(nx, ny, j, i)).size();
+				} catch (NullPointerException e) {}
 		return count;
 	}
 

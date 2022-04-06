@@ -53,25 +53,7 @@ public class Sphere extends Geometry {
 	public String toString() {
 		return "Sphere with center " + center.toString() + " and radius " + ((Double) radius).toString();
 	}
-
-	@Override
-	public List<Point> findIntersections(Ray ray) {
-		Point p0 = ray.getP0();
-		if (p0.equals(center))
-			return List.of(ray.getPoint(radius));
-		Vector u = center.subtract(p0);
-		double tm = ray.getDir().dotProduct(u);
-		double d2 = u.lengthSquared() - tm * tm;
-		double temp = radius * radius - d2;
-		if (Util.alignZero(temp) <= 0)
-			return null;
-		double th = Math.sqrt(temp);
-		double t2 = alignZero(tm + th);
-		if (t2 <= 0)
-			return null;
-		double t1 = alignZero(tm - th);
-		return t1 <= 0 ? List.of(ray.getPoint(t2)) : List.of(ray.getPoint(t1), ray.getPoint(t2));
-	}
+	
 	@Override
 	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 		Point p0 = ray.getP0();

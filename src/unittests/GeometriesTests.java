@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import geometries.*;
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 
 /**
@@ -28,23 +29,20 @@ class GeometriesTests {
 		Geometries emptyGeometries = new Geometries();
 		// ============ Equivalence Partitions Tests ==============
 		// TC01:some of the geometries intersect the ray
-		List<Point> result = shapes.findIntersections(new Ray(new Point(-2, -0.5, -0.5), new Vector(1, 0, 0)));
+		List<GeoPoint> result = shapes.findGeoIntersections(new Ray(new Point(-2, -0.5, -0.5), new Vector(1, 0, 0)));
 		assertEquals(3, result.size(), "wrong number of points");
 		// =============== Boundary Values Tests ==================
 		// TC10: empty geometries list
-		result = emptyGeometries.findIntersections(new Ray(new Point(-2, -0.5, -0.5), new Vector(1, 0, 0)));
-		try {
-			assertEquals(0, result.size(), "wrong number of points");
-		} catch (NullPointerException e) {
-		}
+		result = emptyGeometries.findGeoIntersections(new Ray(new Point(-2, -0.5, -0.5), new Vector(1, 0, 0)));
+		assertNull(result, "wrong number of points");
 		// TC11: no geometry intersects the ray
-		result = shapes.findIntersections(new Ray(new Point(2, 0, 0), new Vector(0, 1, 0)));
-		assertEquals(0, result.size(), "wrong number of points");
+		result = shapes.findGeoIntersections(new Ray(new Point(2, 0, 0), new Vector(0, 1, 0)));
+		assertNull(result, "wrong number of points");
 		// TC12: only one geometry intersect the ray
-		result = shapes.findIntersections(new Ray(new Point(-2, -3, -3), new Vector(1, 0, 0)));
+		result = shapes.findGeoIntersections(new Ray(new Point(-2, -3, -3), new Vector(1, 0, 0)));
 		assertEquals(1, result.size(), "wrong number of points");
 		// TC12: all the geometries intersect the ray
-		result = shapes.findIntersections(new Ray(new Point(-2, 0.25, 0.25), new Vector(1, 0, 0)));
+		result = shapes.findGeoIntersections(new Ray(new Point(-2, 0.25, 0.25), new Vector(1, 0, 0)));
 		assertEquals(4, result.size(), "wrong number of points");
 	}
 

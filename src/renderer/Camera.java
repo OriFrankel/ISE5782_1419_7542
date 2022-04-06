@@ -137,7 +137,7 @@ public class Camera {
 			throw new MissingResourceException("", "", "");
 		for (int i = 0; imageWriter.getNx() > i; ++i)
 			for (int j = 0; imageWriter.getNy() > j; ++j)
-				if (i % (interval * 2) == interval || j % (interval * 2) == interval)
+				if (i % (interval ) == 0 || j % (interval) == 0)
 					imageWriter.writePixel(i, j, color);
 	}
 
