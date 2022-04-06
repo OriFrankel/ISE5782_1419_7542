@@ -3,15 +3,13 @@
  */
 package unittests.renderer;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import primitives.Color;
 import renderer.*;
 
 /**
- * @author ori frankel and tair sprecher
+ * @author ori frankel and yair sprecher
  *
  */
 class ImageWriterTest {
