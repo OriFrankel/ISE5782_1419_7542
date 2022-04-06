@@ -13,8 +13,8 @@ import java.util.MissingResourceException;
  */
 public class Camera {
 	private Point location;
-	private Vector vto, vup, vright;
-	double viewPlaneWidth, viewPlaneHeight, viewPlaneDistance;
+	private Vector vTo, vUp, vRight;
+	private double viewPlaneWidth, viewPlaneHeight, viewPlaneDistance;
 	private ImageWriter imageWriter;
 	private RayTracerBase rayTracer;
 
@@ -22,16 +22,16 @@ public class Camera {
 	 * Constructor for camera,gets location and direction vectors
 	 * 
 	 * @param loc location of the camera
-	 * @param vto vector from the camera to the view plane
-	 * @param vup vector to the upper direction (must be orthogonal to vto)
+	 * @param vTo vector from the camera to the view plane
+	 * @param vUp vector to the upper direction (must be orthogonal to vTo)
 	 */
-	public Camera(Point loc, Vector vto, Vector vup) {
-		if (!isZero(vto.dotProduct(vup)))
+	public Camera(Point loc, Vector vTo, Vector vUp) {
+		if (!isZero(vTo.dotProduct(vUp)))
 			throw new IllegalArgumentException("vectors must be orthogonal");
 		location = loc;
-		this.vto = vto.normalize();
-		this.vup = vup.normalize();
-		this.vright = this.vto.crossProduct(this.vup);
+		this.vTo = vTo.normalize();
+		this.vUp = vUp.normalize();
+		this.vRight = this.vTo.crossProduct(this.vUp);
 	}
 
 	/**
@@ -90,18 +90,18 @@ public class Camera {
 	 */
 	public Ray constructRay(int nX, int nY, int j, int i) {
 		Point p;
-		p = location.add(vto.scale(viewPlaneDistance));
+		p = location.add(vTo.scale(viewPlaneDistance));
 
 		double y = ((nY - 1.0) / 2 - i) * viewPlaneHeight / nY;
 		double x = (j - (nX - 1.0) / 2) * viewPlaneWidth / nX;
 		if (!isZero(x))
-			p = p.add(vright.scale(x));
+			p = p.add(vRight.scale(x));
 		if (!isZero(y))
-			p = p.add(vup.scale(y));
+			p = p.add(vUp.scale(y));
 		try {
 			return new Ray(location, p.subtract(location));
 		} catch (IllegalArgumentException e) {
-			return new Ray(location, vto);
+			return new Ray(location, vTo);
 		}
 	}
 
@@ -118,7 +118,7 @@ public class Camera {
 	 * render the image
 	 */
 	public void renderImage() {
-		if (location == null || vto == null || vup == null || vright == null || isZero(viewPlaneDistance)
+		if (location == null || vTo == null || vUp == null || vRight == null || isZero(viewPlaneDistance)
 				|| imageWriter == null || rayTracer == null)
 			throw new MissingResourceException("", "", "");
 		for (int i = 0; imageWriter.getNx() > i; ++i)

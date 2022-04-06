@@ -10,7 +10,7 @@ import primitives.*;
  * @author ori frankel and yair sprecher
  *
  */
-public class Tube implements Geometry {
+public class Tube extends Geometry {
 	protected final Ray axisRay;
 	protected final double radius;
 
@@ -57,6 +57,9 @@ public class Tube implements Geometry {
 
 	@Override
 	public List<Point> findIntersections(Ray ray) {
+		return null;
+	}
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 		return null;
 	}
 }

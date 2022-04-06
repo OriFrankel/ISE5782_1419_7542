@@ -1,6 +1,7 @@
 package geometries;
 
 import java.util.List;
+
 import primitives.*;
 import static primitives.Util.*;
 
@@ -9,7 +10,7 @@ import static primitives.Util.*;
  * 
  * @author ori frankel and yair sprecher
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 	private final Point p0;
 	private final Vector normal;
 
@@ -73,5 +74,21 @@ public class Plane implements Geometry {
 
 		double t = normal.dotProduct(v) / denominator;
 		return alignZero(t) > 0 ? List.of(ray.getPoint(t)) : null;
+	}
+	@Override
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+		Vector v;
+		try {
+			v = p0.subtract(ray.getP0());
+		} catch (IllegalArgumentException ignore) {
+			return null;
+		}
+
+		double denominator = normal.dotProduct(ray.getDir());
+		if (isZero(denominator))
+			return null;
+
+		double t = normal.dotProduct(v) / denominator;
+		return alignZero(t) > 0 ? List.of(new GeoPoint(this, ray.getPoint(t))) : null;
 	}
 }

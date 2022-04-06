@@ -7,7 +7,7 @@ import java.util.List;
 import primitives.Point;
 import primitives.Ray;
 
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
 	private final List<Intersectable> geometries;
 
 	public Geometries() {

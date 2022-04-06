@@ -8,7 +8,7 @@ import geometries.*;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
+ * testing the integration between class Ray and class Camera
  * @author ori frankel and yair sprecher
  *
  */
