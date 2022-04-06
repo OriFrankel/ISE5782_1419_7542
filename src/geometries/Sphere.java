@@ -1,6 +1,7 @@
 package geometries;
 
 import java.util.List;
+
 import primitives.*;
 import static primitives.Util.*;
 
@@ -10,7 +11,7 @@ import static primitives.Util.*;
  * @author ori frankel and yair sprecher
  *
  */
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
 	private final Point center;
 	private final double radius;
 
@@ -70,5 +71,23 @@ public class Sphere implements Geometry {
 			return null;
 		double t1 = alignZero(tm - th);
 		return t1 <= 0 ? List.of(ray.getPoint(t2)) : List.of(ray.getPoint(t1), ray.getPoint(t2));
+	}
+	@Override
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+		Point p0 = ray.getP0();
+		if (p0.equals(center))
+			return List.of(new GeoPoint(this, ray.getPoint(radius)));
+		Vector u = center.subtract(p0);
+		double tm = ray.getDir().dotProduct(u);
+		double d2 = u.lengthSquared() - tm * tm;
+		double temp = radius * radius - d2;
+		if (Util.alignZero(temp) <= 0)
+			return null;
+		double th = Math.sqrt(temp);
+		double t2 = alignZero(tm + th);
+		if (t2 <= 0)
+			return null;
+		double t1 = alignZero(tm - th);
+		return t1 <= 0 ? List.of(new GeoPoint(this, ray.getPoint(t2))) : List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
 	}
 }

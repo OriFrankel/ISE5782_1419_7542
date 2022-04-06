@@ -9,6 +9,7 @@ import primitives.Color;
 import renderer.*;
 
 /**
+ * testing class ImageWriter
  * @author ori frankel and yair sprecher
  *
  */

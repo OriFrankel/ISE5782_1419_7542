@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import primitives.*;
 
 /**
+ * testing the class Ray
  * @author ori frankel and yair sprecher
  *
  */

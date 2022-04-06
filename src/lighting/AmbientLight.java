@@ -20,7 +20,7 @@ public class AmbientLight {
 	 * @param k     Discount factor
 	 */
 	public AmbientLight(Color color, Double3 k) {
-		intensity = color.reduce(k);
+		intensity = color.scale(k);
 	}
 
 	/**

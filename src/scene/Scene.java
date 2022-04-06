@@ -15,10 +15,22 @@ import lighting.*;
  *
  */
 public class Scene {
+	/**
+	 * name of the scene
+	 */
 	public String name;
-	public Color background;
-	public AmbientLight ambientLight;
-	public Geometries geometries;
+	/**
+	 * background color of the scene
+	 */
+	public Color background= Color.BLACK;
+	/**
+	 * ambient light of the objects in the scene
+	 */
+	public AmbientLight ambientLight= new AmbientLight();
+	/**
+	 * the shapes in the scene
+	 */
+	public Geometries geometries=new Geometries();
 
 	/**
 	 * constructor, sets defaults
@@ -27,9 +39,7 @@ public class Scene {
 	 */
 	public Scene(String name) {
 		this.name = name;
-		this.ambientLight = new AmbientLight();
-		this.background = Color.BLACK;
-		this.geometries = new Geometries();
+
 	}
 
 	/**
