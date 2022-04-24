@@ -1,19 +1,27 @@
+
+/**
+ * 
+ */
 package lighting;
 
-import primitives.*;
+import primitives.Color;
+
 /**
- * class for light
- * 
- * @author ori frankel and yair sprecher
+ * class for light source
+ * @author ori frankel and yair sprecher 
+ *
  */
 abstract class Light {
-	private Color intensity;
-	protected Light(Color other) {
-		intensity = other;
+	private final Color intensity;
+	/**
+	 * constructor, sets intensity
+	 * @param inten the intensity
+	 */
+	protected Light (Color inten) {
+		intensity=inten;
 	}
 	/**
 	 * get the intensity of the light
-	 * 
 	 * @return the intensity
 	 */
 	public Color getIntensity() {

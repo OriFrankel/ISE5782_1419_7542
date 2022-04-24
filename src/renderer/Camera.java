@@ -117,13 +117,14 @@ public class Camera {
 	/**
 	 * render the image
 	 */
-	public void renderImage() {
+	public Camera renderImage() {
 		if (location == null || vTo == null || vUp == null || vRight == null || isZero(viewPlaneDistance)
 				|| imageWriter == null || rayTracer == null)
 			throw new MissingResourceException("", "", "");
 		for (int i = 0; imageWriter.getNx() > i; ++i)
 			for (int j = 0; imageWriter.getNy() > j; ++j)
 				imageWriter.writePixel(i, j, castRay(i, j));
+		return this;
 	}
 
 	/**

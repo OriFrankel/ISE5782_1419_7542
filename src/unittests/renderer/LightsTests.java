@@ -38,7 +38,7 @@ public class LightsTests {
 	private Material material = new Material().setKd(0.5).setKs(0.5).setShininess(300);
 	private Geometry triangle1 = new Triangle(p[0], p[1], p[2]).setMaterial(material);
 	private Geometry triangle2 = new Triangle(p[0], p[1], p[3]).setMaterial(material);
-	private Geometry sphere = new Sphere(new Point(0, 0, -50), 50d) //
+	private Geometry sphere = new Sphere(50d, new Point(0, 0, -50)) //
 			.setEmission(new Color(BLUE).reduce(2)) //
 			.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300));
 
@@ -131,5 +131,36 @@ public class LightsTests {
 				.renderImage() //
 				.writeToImage(); //
 	}
-
+	
+	/**
+	 * Produce a picture of a two triangles lighted by a some light
+	 */
+	@Test
+	public void testMultipleLights1() {
+		scene2.geometries.add(triangle1, triangle2);
+		scene2.lights.add(new SpotLight(new Color(0, 1000, 0), trPL, trDL).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new PointLight(new Color(0, 0, 1000), new Point(-50, -50, -100)).setKl(0.001).setKq(0.0002));
+		scene2.lights.add(new DirectionalLight(new Color(1000, 0, 0), trDL));
+		ImageWriter imageWriter = new ImageWriter("someLight", 500, 500);
+		camera2.setImageWriter(imageWriter)
+				.setRayTracer(new RayTracerBasic(scene2))
+				.renderImage()
+				.writeToImage();
+	}
+	
+	/**
+	 * Produce a picture of a sphere lighted by a some light
+	 */
+	@Test
+	public void testMultipleLights2() {
+		scene1.geometries.add(sphere);
+		scene1.lights.add(new SpotLight(new Color(0, 1000, 0), spPL, new Vector(1, 1, -0.5)).setKl(0.001).setKq(0.0001));
+		scene1.lights.add(new PointLight(new Color(500, 500, 0), new Point(-50, 50, 0)).setKl(0.001).setKq(0.0002));
+		scene1.lights.add(new DirectionalLight(new Color(1000, 0, 0), new Vector(-2, -2, -2)));
+		ImageWriter imageWriter = new ImageWriter("someLight2", 500, 500);
+		camera1.setImageWriter(imageWriter)
+				.setRayTracer(new RayTracerBasic(scene1))
+				.renderImage()
+				.writeToImage();
+	}
 }
