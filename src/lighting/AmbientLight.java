@@ -10,9 +10,7 @@ import primitives.*;
  * 
  * @author ori frankel and yair sprecher
  */
-public class AmbientLight {
-	final private Color intensity;
-
+public class AmbientLight extends Light {
 	/**
 	 * constructor for AmbientLight, gets color and Discount factor
 	 * 
@@ -20,22 +18,13 @@ public class AmbientLight {
 	 * @param k     Discount factor
 	 */
 	public AmbientLight(Color color, Double3 k) {
-		intensity = color.scale(k);
+		super(color.scale(k));
 	}
 
 	/**
 	 * constructor, initializes intensity to black
 	 */
 	public AmbientLight() {
-		intensity = Color.BLACK;
-	}
-
-	/**
-	 * get the intensity of the light
-	 * 
-	 * @return the intensity
-	 */
-	public Color getIntensity() {
-		return intensity;
+		super(Color.BLACK);
 	}
 }

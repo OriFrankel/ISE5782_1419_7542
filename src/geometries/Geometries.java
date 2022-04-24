@@ -17,7 +17,6 @@ public class Geometries extends Intersectable {
 
 	public Geometries(Intersectable... geometries) {
 		this.geometries = new LinkedList<Intersectable>(Arrays.asList(geometries));
-		;
 	}
 
 	public void add(Intersectable... newGeometry) {
