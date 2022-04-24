@@ -1,6 +1,6 @@
 package primitives;
 
-import geometries.Intersectable.GeoPoint; 
+import geometries.Intersectable.GeoPoint;
 import java.util.List;
 import geometries.*;
 
@@ -57,7 +57,7 @@ public class Ray {
 
 	@Override
 	public String toString() {
-		return p0.toString() + dir.toString();
+		return "" + p0 + dir;
 	}
 
 	/**
@@ -77,8 +77,8 @@ public class Ray {
 	 * @return the closest point
 	 */
 	public Point findClosestPoint(List<Point> points) {
-	    return points == null || points.isEmpty() ? null
-	           : findClosestGeoPoint(points.stream().map(p ->new Geometries().new GeoPoint(null, p)).toList()).point;
+		return points == null || points.isEmpty() ? null
+				: findClosestGeoPoint(points.stream().map(p -> new Geometries().new GeoPoint(null, p)).toList()).point;
 	}
 
 	/**

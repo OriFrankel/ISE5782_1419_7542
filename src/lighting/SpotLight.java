@@ -8,29 +8,30 @@ import static primitives.Util.*;
 
 /**
  * class for light source that have a direction and is in a point
- * @author ori frankel and yair sprecher 
+ * 
+ * @author ori frankel and yair sprecher
  *
  */
 public class SpotLight extends PointLight {
-	private Vector direction;
+	private final Vector direction;
+
 	@Override
 	public Color getIntensity(Point p) {
-		double d=alignZero(getL(p).dotProduct(direction));
-		if(d>0) {
-			return super.getIntensity(p).scale(d);
-		}
-		return Color.BLACK;
+		double d = alignZero(getL(p).dotProduct(direction));
+		return d > 0 ? super.getIntensity(p).scale(d) : Color.BLACK;
 	}
+
 	/**
-	 * constructor, gets intensity of the light,position  and direction
+	 * constructor, gets intensity of the light,position and direction
+	 * 
 	 * @param intensity the intensity
-	 * @param position the position
+	 * @param position  the position
 	 * @param direction the direction
 	 * 
 	 */
-	public SpotLight(Color intensity,Point position, Vector direction) {
-		super(intensity,position);
-		this.direction=direction.normalize();
-		
+	public SpotLight(Color intensity, Point position, Vector direction) {
+		super(intensity, position);
+		this.direction = direction.normalize();
+
 	}
 }

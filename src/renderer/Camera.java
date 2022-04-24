@@ -121,9 +121,11 @@ public class Camera {
 		if (location == null || vTo == null || vUp == null || vRight == null || isZero(viewPlaneDistance)
 				|| imageWriter == null || rayTracer == null)
 			throw new MissingResourceException("", "", "");
-		for (int i = 0; imageWriter.getNx() > i; ++i)
-			for (int j = 0; imageWriter.getNy() > j; ++j)
-				imageWriter.writePixel(i, j, castRay(i, j));
+		int nX = imageWriter.getNx();
+		int nY = imageWriter.getNy();
+		for (int i = 0; nX > i; ++i)
+			for (int j = 0; nY > j; ++j)
+				imageWriter.writePixel(i, j, castRay(i, j, nX, nY));
 		return this;
 	}
 
@@ -136,9 +138,11 @@ public class Camera {
 	public void printGrid(int interval, Color color) {
 		if (imageWriter == null)
 			throw new MissingResourceException("", "", "");
-		for (int i = 0; imageWriter.getNx() > i; ++i)
-			for (int j = 0; imageWriter.getNy() > j; ++j)
-				if (i % (interval ) == 0 || j % (interval) == 0)
+		int nX = imageWriter.getNx();
+		int nY = imageWriter.getNy();
+		for (int i = 0; nX > i; ++i)
+			for (int j = 0; nY > j; ++j)
+				if (i % (interval) == 0 || j % (interval) == 0)
 					imageWriter.writePixel(i, j, color);
 	}
 
@@ -151,7 +155,7 @@ public class Camera {
 		imageWriter.writeToImage();
 	}
 
-	private Color castRay(int i, int j) {
-		return rayTracer.traceRay(constructRay(imageWriter.getNx(), imageWriter.getNy(), i, j));
+	private Color castRay(int i, int j, int nX, int nY) {
+		return rayTracer.traceRay(constructRay(nX, nY, i, j));
 	}
 }

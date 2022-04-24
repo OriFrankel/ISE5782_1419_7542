@@ -25,19 +25,20 @@ public class Scene {
 	/**
 	 * background color of the scene
 	 */
-	public Color background= Color.BLACK;
+	public Color background = Color.BLACK;
 	/**
 	 * ambient light of the objects in the scene
 	 */
-	public AmbientLight ambientLight= new AmbientLight();
+	public AmbientLight ambientLight = new AmbientLight();
 	/**
 	 * the shapes in the scene
 	 */
-	public Geometries geometries=new Geometries();
+	public Geometries geometries = new Geometries();
 	/**
 	 * the light sources in the scene
 	 */
-	public List<LightSource> lights=new LinkedList<>();
+	public List<LightSource> lights = new LinkedList<>();
+
 	/**
 	 * constructor, sets defaults
 	 * 
@@ -80,6 +81,7 @@ public class Scene {
 		this.geometries = geometries;
 		return this;
 	}
+
 	/**
 	 * set the lights list
 	 * 
