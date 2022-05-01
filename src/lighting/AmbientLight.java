@@ -22,6 +22,16 @@ public class AmbientLight extends Light {
 	}
 
 	/**
+	 * constructor for AmbientLight, gets color and Discount factor
+	 * 
+	 * @param color the color
+	 * @param k     Discount factor
+	 */
+	public AmbientLight(Color color, double k) {
+		super(color.scale(k));
+	}
+
+	/**
 	 * constructor, initializes intensity to black
 	 */
 	public AmbientLight() {

@@ -67,7 +67,11 @@ public class Ray {
 	 * @return the point
 	 */
 	public Point getPoint(double d) {
-		return Util.isZero(d) ? p0 : p0.add(dir.scale(d));
+		try {
+			return Util.isZero(d) ? p0 : p0.add(dir.scale(d));
+		} catch (IllegalArgumentException e) {
+			return p0;
+		}
 	}
 
 	/**

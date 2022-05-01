@@ -17,6 +17,8 @@ import static primitives.Util.*;
  * @author ori frankel and yair sprecher
  */
 public class RayTracerBasic extends RayTracerBase {
+	private static final double DELTA = 0.01;
+
 	/**
 	 * constructor, sets scene
 	 * 
@@ -50,9 +52,11 @@ public class RayTracerBasic extends RayTracerBase {
 			Vector l = lightSource.getL(intersection.point);
 			double nl = alignZero(n.dotProduct(l));
 			if (nl * nv > 0) { // sign(nl) == sing(nv)
-				Color lightIntensity = lightSource.getIntensity(intersection.point);
-				color = color.add(calcDiffusive(material.kD, nl, lightIntensity))
-						.add(calcSpecular(material.kS, l, n, nl, v, material.nShininess, lightIntensity));
+				if (unshaded(intersection, lightSource, l, n, nv)) {
+					Color lightIntensity = lightSource.getIntensity(intersection.point);
+					color = color.add(calcDiffusive(material.kD, nl, lightIntensity))
+							.add(calcSpecular(material.kS, l, n, nl, v, material.nShininess, lightIntensity));
+				}
 			}
 		}
 		return color;
@@ -66,5 +70,21 @@ public class RayTracerBasic extends RayTracerBase {
 
 	private Color calcDiffusive(Double3 kD, double nl, Color intensity) {
 		return intensity.scale(kD.scale(nl > 0 ? nl : -nl));
+	}
+
+	private boolean unshaded(GeoPoint gp, LightSource lS, Vector l, Vector n, double nv) {
+		Vector lightDirection = l.scale(-1); // from point to light source
+		Vector epsVector = n.scale(nv < 0 ? DELTA : -DELTA);
+		Point point = gp.point.add(epsVector);
+		Ray lightRay = new Ray(point, lightDirection);
+		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+		if (intersections == null)
+			return true;
+		double dist = lS.getDistance(point);
+		for (GeoPoint intersection:intersections) {
+			if (alignZero(point.distance(intersection.point) - dist) < 0)
+				return false;
+		}
+		return true;
 	}
 }

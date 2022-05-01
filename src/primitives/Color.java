@@ -41,11 +41,12 @@ public class Color {
 		rgb = new Double3(r, g, b);
 	}
 
+
 	/**
 	 * Constructor to generate a color according to RGB components Each component in
 	 * range 0..255 (for printed white color) or more [for lights]
 	 *
-	 * @param rgb triad of Red/Green/Blue components
+	 * @param rgb triad of Red/Green/Blue components 
 	 */
 	private Color(Double3 rgb) {
 		if (rgb.d1 < 0 || rgb.d2 < 0 || rgb.d3 < 0)
@@ -104,7 +105,7 @@ public class Color {
 			throw new IllegalArgumentException("Can't scale a color by a negative number");
 		return new Color(rgb.product(k));
 	}
-
+	
 	/**
 	 * Scale the color by a scalar
 	 *
@@ -141,4 +142,8 @@ public class Color {
 		return new Color(rgb.d1 / k.d1, rgb.d2 / k.d2, rgb.d3 / k.d3);
 	}
 
+	@Override
+	public String toString() {
+		return "rgb:" + rgb;
+	}
 }
