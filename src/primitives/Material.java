@@ -19,6 +19,14 @@ public class Material {
 	 */
 	public Double3 kS = Double3.ZERO;
 	/**
+	 * refraction coefficient
+	 */
+	public Double3 kT = Double3.ZERO;
+	/**
+	 * reflection coefficient
+	 */
+	public Double3 kR = Double3.ZERO;
+	/**
 	 * the power of the shininess
 	 */
 	public int nShininess = 0;
@@ -77,5 +85,22 @@ public class Material {
 		nShininess = nSh;
 		return this;
 	}
-
+	/**
+	 * setter for the refraction coefficient
+	 * @param d the refraction coefficient
+	 * @return the object
+	 */
+	public Material setKt(double d) {
+		kT = new Double3(d);
+		return this;
+	}
+	/**
+	 * setter for the reflection coefficient
+	 * @param d the reflection coefficient
+	 * @return the object
+	 */
+	public Material setKr(double d) {
+		kR = new Double3(d);
+		return this;
+	}
 }

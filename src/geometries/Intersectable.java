@@ -87,4 +87,12 @@ public abstract class Intersectable {
 	 * @return list of intersection points
 	 */
 	protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+	/**
+	 * find the closest intersection of the ray
+	 * @param ray the ray
+	 * @return the closest intersection if there is any, else null
+	 */
+	public GeoPoint findClosestIntersection(Ray ray) {
+		return ray.findClosestGeoPoint(findGeoIntersections(ray));
+	}
 }

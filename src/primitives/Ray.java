@@ -13,6 +13,19 @@ import geometries.*;
 public class Ray {
 	private final Point p0;
 	private final Vector dir;
+	private static final double DELTA = 0.01;
+
+	/**
+	 * Constructor for Ray, gets the approximated start point, direction and
+	 * direction to move the point
+	 * 
+	 * @param point  approximated start point
+	 * @param newDir direction
+	 * @param n      direction to move the point
+	 */
+	public Ray(Point point, Vector newDir, Vector n) {
+		this(point.add(n.scale(n.dotProduct(newDir) > 0 ? DELTA : -DELTA)), newDir);
+	}
 
 	/**
 	 * constructor, for Ray, gets start point and direction
