@@ -9,7 +9,7 @@ import static primitives.Util.*;
 /**
  * class for light source that have a direction and is in a point
  * 
- * @author ori frankel and yair sprecher
+ * @author Ori Frankel and Yair Sprecher
  *
  */
 public class SpotLight extends PointLight {

@@ -60,11 +60,8 @@ public class Ray {
 	public boolean equals(Object other) {
 		if (other == this)
 			return true;
-		if (other == null)
+		if (other == null || !(other instanceof Ray ray))
 			return false;
-		if (!(other instanceof Ray))
-			return false;
-		Ray ray = (Ray) other;
 		return ray.p0.equals(p0) && ray.dir.equals(dir);
 	}
 
@@ -94,7 +91,7 @@ public class Ray {
 	 * @return the closest point
 	 */
 	public Point findClosestPoint(List<Point> points) {
-		return points == null || points.isEmpty() ? null
+		return points == null ? null
 				: findClosestGeoPoint(points.stream().map(p -> new Geometries().new GeoPoint(null, p)).toList()).point;
 	}
 

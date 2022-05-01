@@ -101,9 +101,9 @@ public class RayTracerBasic extends RayTracerBase {
 		// Point point = gp.point.add(epsVector);
 		Ray lightRay = new Ray(gp.point, lightDirection, n);
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
-		if (intersections == null)
-			return Double3.ONE;
 		Double3 ktr = Double3.ONE;
+		if (intersections == null)
+			return ktr;
 		double dist = lS.getDistance(gp.point);
 		for (GeoPoint intersection : intersections) {
 			if (alignZero(gp.point.distance(intersection.point) - dist) < 0)

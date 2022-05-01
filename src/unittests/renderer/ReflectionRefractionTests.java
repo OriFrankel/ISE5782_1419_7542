@@ -137,4 +137,30 @@ public class ReflectionRefractionTests {
 				.renderImage() //
 				.writeToImage();
 	}
+
+	/**
+	 * test with a triangle inside the sphere and behind it a reflective triangle
+	 * and a plane
+	 */
+/*	@Test
+	public void tenObjectsTest() {
+		Camera camera = new Camera(new Point(0, 100, 100), new Vector(0, -1, -1), new Vector(0, 1, -1)) //
+				.setVPSize(200, 200).setVPDistance(100);
+
+		scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.10));
+
+		scene.geometries.add( //
+				new Plane(new Point(0, 0, -100), new Vector(0, 0, 1)).setEmission(new Color(WHITE)),
+				new Sphere(new Point(50, 50, 25), 25)
+						.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(20).setKr(0.5)));
+
+		scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point(60, 50, 50), new Vector(-10, 0, -10)) //
+				.setKl(4E-5).setKq(2E-7));
+
+		ImageWriter imageWriter = new ImageWriter("ourTest2", 600, 600);
+		camera.setImageWriter(imageWriter) //
+				.setRayTracer(new RayTracerBasic(scene)) //
+				.renderImage() //
+				.writeToImage();
+	}*/
 }
