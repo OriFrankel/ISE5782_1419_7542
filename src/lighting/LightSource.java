@@ -24,9 +24,10 @@ public interface LightSource {
 	 * @return the direction
 	 */
 	public Vector getL(Point p);
-	
+
 	/**
-	 * calculate the distance from a point to the lightSource (infinity if needed)
+	 * calculate the distance from a point to the lightSource (infiny)
+	 * 
 	 * @param point some Point
 	 * @return the distance from the source to a point
 	 */
