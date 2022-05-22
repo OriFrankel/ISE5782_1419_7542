@@ -1,5 +1,6 @@
 package renderer;
 
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class BlackBoard {
 	 * @return the object itself
 	 */
 	public BlackBoard setAmountOfRays(int amountOfRays) {
-		this.amountOfRays = amountOfRays;
+		this.amountOfRays = (int)Math.sqrt(amountOfRays)/2;
 		return this;
 	}
 
@@ -61,7 +62,6 @@ public class BlackBoard {
 	 * @return
 	 */
 	public List<Point> calculatePoints() {
-		int n = (int) (Math.sqrt(amountOfRays) / 2);
 		List<Point> list = new LinkedList<Point>();
 		return null;
 	}
