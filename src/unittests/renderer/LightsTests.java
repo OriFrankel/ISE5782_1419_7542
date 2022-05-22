@@ -131,7 +131,7 @@ public class LightsTests {
 				.renderImage() //
 				.writeToImage(); //
 	}
-	
+
 	/**
 	 * Produce a picture of a two triangles lighted by a some light
 	 */
@@ -142,25 +142,20 @@ public class LightsTests {
 		scene2.lights.add(new PointLight(new Color(0, 0, 1000), new Point(-50, -50, -100)).setKl(0.001).setKq(0.0002));
 		scene2.lights.add(new DirectionalLight(new Color(1000, 0, 0), trDL));
 		ImageWriter imageWriter = new ImageWriter("someLight", 500, 500);
-		camera2.setImageWriter(imageWriter)
-				.setRayTracer(new RayTracerBasic(scene2))
-				.renderImage()
-				.writeToImage();
+		camera2.setImageWriter(imageWriter).setRayTracer(new RayTracerBasic(scene2)).renderImage().writeToImage();
 	}
-	
+
 	/**
 	 * Produce a picture of a sphere lighted by a some light
 	 */
 	@Test
 	public void testMultipleLights2() {
 		scene1.geometries.add(sphere);
-		scene1.lights.add(new SpotLight(new Color(0, 1000, 0), spPL, new Vector(1, 1, -0.5)).setKl(0.001).setKq(0.0001));
+		scene1.lights
+				.add(new SpotLight(new Color(0, 1000, 0), spPL, new Vector(1, 1, -0.5)).setKl(0.001).setKq(0.0001));
 		scene1.lights.add(new PointLight(new Color(500, 500, 0), new Point(-50, 50, 0)).setKl(0.001).setKq(0.0002));
 		scene1.lights.add(new DirectionalLight(new Color(1000, 0, 0), new Vector(-2, -2, -2)));
 		ImageWriter imageWriter = new ImageWriter("someLight2", 500, 500);
-		camera1.setImageWriter(imageWriter)
-				.setRayTracer(new RayTracerBasic(scene1))
-				.renderImage()
-				.writeToImage();
+		camera1.setImageWriter(imageWriter).setRayTracer(new RayTracerBasic(scene1)).renderImage().writeToImage();
 	}
 }

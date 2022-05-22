@@ -25,6 +25,16 @@ public class Sphere extends Geometry {
 		this.center = center;
 		this.radius = radius;
 	}
+	/**
+	 * constructor for sphere gets center and radius
+	 * 
+	 * @param radius the radius
+	 * @param center the center
+	 * 
+	 */
+	public Sphere(Point center, double radius) {
+		this(radius,  center);
+	}
 
 	@Override
 	public Vector getNormal(Point p) {

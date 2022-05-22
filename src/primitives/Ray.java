@@ -1,6 +1,6 @@
 package primitives;
 
-import geometries.Intersectable.GeoPoint; 
+import geometries.Intersectable.GeoPoint;
 import java.util.List;
 import geometries.*;
 
@@ -13,6 +13,19 @@ import geometries.*;
 public class Ray {
 	private final Point p0;
 	private final Vector dir;
+	private static final double DELTA = 0.01;
+
+	/**
+	 * Constructor for Ray, gets the approximated start point, direction and
+	 * direction to move the point
+	 * 
+	 * @param point  approximated start point
+	 * @param newDir direction
+	 * @param n      direction to move the point
+	 */
+	public Ray(Point point, Vector newDir, Vector n) {
+		this(point.add(n.scale(n.dotProduct(newDir) > 0 ? DELTA : -DELTA)), newDir);
+	}
 
 	/**
 	 * constructor, for Ray, gets start point and direction
@@ -47,17 +60,15 @@ public class Ray {
 	public boolean equals(Object other) {
 		if (other == this)
 			return true;
-		if (other == null)
+		if (other == null || !(other instanceof Ray))
 			return false;
-		if (!(other instanceof Ray))
-			return false;
-		Ray ray = (Ray) other;
+		Ray ray=(Ray)other;
 		return ray.p0.equals(p0) && ray.dir.equals(dir);
 	}
 
 	@Override
 	public String toString() {
-		return p0.toString() + dir.toString();
+		return "" + p0 + dir;
 	}
 
 	/**
@@ -67,7 +78,11 @@ public class Ray {
 	 * @return the point
 	 */
 	public Point getPoint(double d) {
-		return Util.isZero(d) ? p0 : p0.add(dir.scale(d));
+		try {
+			return Util.isZero(d) ? p0 : p0.add(dir.scale(d));
+		} catch (IllegalArgumentException e) {
+			return p0;
+		}
 	}
 
 	/**
@@ -77,8 +92,8 @@ public class Ray {
 	 * @return the closest point
 	 */
 	public Point findClosestPoint(List<Point> points) {
-	    return points == null || points.isEmpty() ? null
-	           : findClosestGeoPoint(points.stream().map(p ->new Geometries().new GeoPoint(null, p)).toList()).point;
+		return points == null ? null
+				: findClosestGeoPoint(points.stream().map(p -> new Geometries().new GeoPoint(null, p)).toList()).point;
 	}
 
 	/**

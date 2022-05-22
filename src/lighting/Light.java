@@ -12,7 +12,10 @@ import primitives.Color;
  *
  */
 abstract class Light {
-	private final Color intensity;
+	/**
+	 * the intensity of the light
+	 */
+	protected final Color intensity;
 	/**
 	 * constructor, sets intensity
 	 * @param inten the intensity
