@@ -20,7 +20,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 	private static final int MAX_CALC_COLOR_LEVEL = 10;
 	private static final double MIN_CALC_COLOR_K = 0.001;
-
+	
 	/**
 	 * constructor, sets scene
 	 * 
@@ -72,7 +72,7 @@ public class RayTracerBasic extends RayTracerBase {
 			Vector l = lightSource.getL(intersection.point);
 			double nl = alignZero(n.dotProduct(l));
 			if (nl * nv > 0) { // sign(nl) == sing(nv)
-				Double3 tra = transparency(intersection, lightSource, l, n, nv);
+				Double3 tra = transparency(intersection, lightSource, n, nv);
 				if (!tra.equals(Double3.ZERO)) {
 					Color lightIntensity = lightSource.getIntensity(intersection.point);
 					color = color.add(lightIntensity.scale(calcDiffusive(material.kD, nl)
@@ -141,20 +141,25 @@ public class RayTracerBasic extends RayTracerBase {
 	private Double3 calcDiffusive(Double3 kD, double nl) {
 		return (kD.scale(nl > 0 ? nl : -nl));
 	}
-
+	private Double3 transparency(GeoPoint gp, LightSource lS, Vector n, double nv) {
+		List<Vector>vecs=lS.getVecs(gp.point, scene.amountOfRays);
+		Double3 res=Double3.ZERO;
+		for(Vector v1:vecs)res=res.add(transparency(gp, lS, v1, n, nv));
+		res=res.reduce(scene.amountOfRays);
+		return res;
+	}
 	/**
 	 * calculate the transparency, how much light from the light source comes to the
 	 * point
 	 * 
 	 * @param gp the point
 	 * @param lS the light source
-	 * @param l  vector from the light source
+	 * @param lightDirection  vector to calculate transparency
 	 * @param n  normal at the point
 	 * @param nv dotproduct of n and the vector from the camera
 	 * @return the transparency
 	 */
-	private Double3 transparency(GeoPoint gp, LightSource lS, Vector l, Vector n, double nv) {
-		Vector lightDirection = l.scale(-1); // from point to light source
+	private Double3 transparency(GeoPoint gp, LightSource lS, Vector lightDirection, Vector n, double nv) {
 		// Vector epsVector = n.scale(nv < 0 ? DELTA : -DELTA);
 		// Point point = gp.point.add(epsVector);
 		Ray lightRay = new Ray(gp.point, lightDirection, n);
