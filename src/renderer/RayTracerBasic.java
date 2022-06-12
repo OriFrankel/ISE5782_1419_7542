@@ -20,7 +20,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 	private static final int MAX_CALC_COLOR_LEVEL = 10;
 	private static final double MIN_CALC_COLOR_K = 0.001;
-	
+	public int amountOfRays=1;
 	/**
 	 * constructor, sets scene
 	 * 
@@ -142,10 +142,10 @@ public class RayTracerBasic extends RayTracerBase {
 		return (kD.scale(nl > 0 ? nl : -nl));
 	}
 	private Double3 transparency(GeoPoint gp, LightSource lS, Vector n, double nv) {
-		List<Vector>vecs=lS.getVecs(gp.point, scene.amountOfRays);
+		List<Vector>vecs=lS.getVecs(gp.point, amountOfRays);
 		Double3 res=Double3.ZERO;
 		for(Vector v1:vecs)res=res.add(transparency(gp, lS, v1, n, nv));
-		res=res.reduce(scene.amountOfRays);
+		res=res.reduce(amountOfRays);
 		return res;
 	}
 	/**
@@ -212,5 +212,14 @@ public class RayTracerBasic extends RayTracerBase {
 	 */
 	private Color calcColor(GeoPoint gp, Ray ray) {
 		return scene.ambientLight.getIntensity().add(calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, Double3.ONE));
+	}
+
+	/**
+	 * set amount of rays
+	 * @param amountOfRays
+	 */
+	public RayTracerBasic setAmountOfRays(int amountOfRays) {
+		this.amountOfRays = amountOfRays;
+		return this;
 	}
 }

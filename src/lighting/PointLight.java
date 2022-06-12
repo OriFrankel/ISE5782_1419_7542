@@ -31,7 +31,10 @@ public class PointLight extends Light implements LightSource {
 	 * the constant coefficient
 	 */
 	protected double kC = 1;
-	private double space = 1;
+	/**
+	 * bb size for soft shadow
+	 */
+	private double size = 10;
 
 	@Override
 	public Color getIntensity(Point p) {
@@ -97,11 +100,20 @@ public class PointLight extends Light implements LightSource {
 	public List<Vector> getVecs(Point p, int amountOfRays) {
 		if (amountOfRays == 1)
 			return List.of(getL(p).scale(-1));
-		List<Point> list = new BlackBoard(position.subtract(p), position).setSpace(space).setAmountOfRays(amountOfRays)
+		List<Point> list = new BlackBoard(position.subtract(p), position).setSize(size).setAmountOfRays(amountOfRays)
 				.calculatePoints();
 		List<Vector> res = new LinkedList<Vector>();
 		for (Point p1 : list)
 			res.add(p1.subtract(p));
 		return res;
+	}
+	/**
+	 * setter for bb size
+	 * @param d the size
+	 * @return the object itself
+	 */
+	public PointLight setSize(double d) {
+		size=d;
+		return this;
 	}
 }

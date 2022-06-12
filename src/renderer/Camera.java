@@ -135,7 +135,7 @@ public class Camera {
 	 * @param interval size of the grid in pixles
 	 * @param color    color of the grid
 	 */
-	public void printGrid(int interval, Color color) {
+	public Camera printGrid(int interval, Color color) {
 		if (imageWriter == null)
 			throw new MissingResourceException("", "", "");
 		int nX = imageWriter.getNx();
@@ -144,6 +144,7 @@ public class Camera {
 			for (int j = 0; nY > j; ++j)
 				if (i % (interval) == 0 || j % (interval) == 0)
 					imageWriter.writePixel(i, j, color);
+		return this;
 	}
 
 	/**

@@ -14,7 +14,7 @@ public class BlackBoard {
 	private Point center;
 	private Vector vUp;
 	private Vector vRight;
-	private double space = 1;
+	private double size = 10;
 	private static Vector firstTry = new Vector(0, 0, 1);
 	private static Vector secondTry = new Vector(0, 1, 0);
 
@@ -47,13 +47,13 @@ public class BlackBoard {
 	}
 
 	/**
-	 * setter for space
+	 * setter for size
 	 * 
-	 * @param space the space
+	 * @param size the size
 	 * @return the object itself
 	 */
-	public BlackBoard setSpace(double space) {
-		this.space = space;
+	public BlackBoard setSize(double size) {
+		this.size = size;
 		return this;
 	}
 
@@ -64,7 +64,7 @@ public class BlackBoard {
 	 */
 	public List<Point> calculatePoints() {
 		List<Point> list = new LinkedList<Point>();
-		Vector v1 = vUp.scale(space), v2 = vRight.scale(space);
+		Vector v1 = vUp.scale(size/squareSize), v2 = vRight.scale(size/squareSize);
 		for (int i = -squareSize; squareSize >= i; ++i) {
 			Point cur = center.subtract(v1.scale(squareSize));
 			if (i != 0)
