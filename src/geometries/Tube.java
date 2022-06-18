@@ -59,4 +59,8 @@ public class Tube extends Geometry {
 	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 		return null;
 	}
+	@Override
+	protected BoundingRegion getBoundingRegion() {
+		return null;
+	}
 }

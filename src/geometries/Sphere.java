@@ -82,4 +82,9 @@ public class Sphere extends Geometry {
 		double t1 = alignZero(tm - th);
 		return t1 <= 0 ? List.of(new GeoPoint(this, ray.getPoint(t2))) : List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
 	}
+	@Override
+	protected BoundingRegion getBoundingRegion() {
+		Vector v = new Vector(radius, radius, radius);
+		return new BoundingRegion(center.subtract(v), center.add(v), false);
+	}
 }

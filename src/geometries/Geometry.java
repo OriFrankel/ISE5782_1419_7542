@@ -11,6 +11,7 @@ import primitives.*;
 public abstract class Geometry extends Intersectable {
 	protected Color emission = Color.BLACK;
 	private Material material = new Material();
+	private BoundingRegion bRegion = null;
 
 	/**
 	 * normal on a point in the geometry
@@ -19,6 +20,8 @@ public abstract class Geometry extends Intersectable {
 	 * @return the normal
 	 */
 	public abstract Vector getNormal(Point p);
+
+	protected abstract BoundingRegion getBoundingRegion();
 
 	/**
 	 * getter for emission
@@ -58,5 +61,14 @@ public abstract class Geometry extends Intersectable {
 	public Geometry setMaterial(Material material) {
 		this.material = material;
 		return this;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public BoundingRegion getBR() {
+		if (bRegion == null)
+			bRegion = getBoundingRegion();
+		return bRegion;
 	}
 }

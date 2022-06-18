@@ -113,4 +113,19 @@ public class Polygon extends Geometry {
 		}
 		return List.of(new GeoPoint(this, point));
 	}
+	@Override
+	protected BoundingRegion getBoundingRegion() {
+		double minx = vertices.get(0).getX(), maxx = vertices.get(0).getX(),
+				miny = vertices.get(0).getY(), maxy = vertices.get(0).getY(),
+				minz = vertices.get(0).getZ(), maxz = vertices.get(0).getZ();
+		for (Point i : vertices) {
+			minx = Math.min(minx, i.getX());
+			miny = Math.min(miny, i.getY());
+			minz = Math.min(minx, i.getZ());
+			maxx = Math.max(maxx, i.getX());
+			maxy = Math.max(maxy, i.getY());
+			maxz = Math.max(maxz, i.getZ());
+		}
+		return new BoundingRegion(new Point(minx, miny, minz), new Point(maxx, maxy, maxz), false);
+	}
 }

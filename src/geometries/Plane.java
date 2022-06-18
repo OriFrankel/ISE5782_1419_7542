@@ -75,4 +75,8 @@ public class Plane extends Geometry {
 		double t = normal.dotProduct(v) / denominator;
 		return alignZero(t) > 0 ? List.of(new GeoPoint(this, ray.getPoint(t))) : null;
 	}
+	@Override
+	protected BoundingRegion getBoundingRegion() {
+		return new BoundingRegion(null, null, true);
+	}
 }

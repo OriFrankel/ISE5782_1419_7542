@@ -38,7 +38,7 @@ public class Scene {
 	 * the light sources in the scene
 	 */
 	public List<LightSource> lights = new LinkedList<>();
-	public int amountOfRays=1;
+	
 
 	/**
 	 * constructor, sets defaults
@@ -93,12 +93,5 @@ public class Scene {
 		this.lights = lights;
 		return this;
 	}
-	/**
-	 * set amount of rays
-	 * @param amountOfRays
-	 */
-	public Scene setAmountOfRays(int amountOfRays) {
-		this.amountOfRays = amountOfRays;
-		return this;
-	}
+	
 }

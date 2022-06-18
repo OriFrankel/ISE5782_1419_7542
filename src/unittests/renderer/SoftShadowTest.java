@@ -29,10 +29,10 @@ class SoftShadowTest {
 			.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30));
 	private Material trMaterial = new Material().setKd(0.5).setKs(0.5).setShininess(30);
 
-	private Scene scene = new Scene("Test scene").setAmountOfRays(121);
+	private Scene scene = new Scene("Test scene");
 	private Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
 			.setVPSize(200, 200).setVPDistance(1000) //
-			.setRayTracer(new RayTracerBasic(scene));
+			.setRayTracer(new RayTracerBasic(scene).setAmountOfRays(121));
 
 	/**
 	 * Helper function for the tests in this module
@@ -41,7 +41,7 @@ class SoftShadowTest {
 		scene.geometries.add(sphere, triangle.setEmission(new Color(BLUE)).setMaterial(trMaterial));
 		scene.lights.add( //
 				new SpotLight(new Color(400, 240, 0), spotLocation, new Vector(1, 1, -3)) //
-						.setKl(1E-5).setKq(1.5E-7));
+						.setKl(1E-5).setKq(1.5E-7).setSize(2));
 		camera.setImageWriter(new ImageWriter(pictName, 400, 400)) //
 				.renderImage() //
 				.writeToImage();
@@ -78,7 +78,7 @@ class SoftShadowTest {
 						.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)));
 
 		scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point(600, 50, 500), new Vector(-10, 0, -10)) //
-				.setKl(4E-5).setKq(2E-7));
+				.setKl(4E-5).setKq(2E-7).setSize(10));
 
 		ImageWriter imageWriter = new ImageWriter("ourTestSoftShadows", 600, 600);
 		camera.setImageWriter(imageWriter) //
@@ -86,4 +86,5 @@ class SoftShadowTest {
 				.renderImage() //
 				.writeToImage();
 	}
+	
 }
