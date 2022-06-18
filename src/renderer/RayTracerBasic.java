@@ -20,7 +20,8 @@ public class RayTracerBasic extends RayTracerBase {
 
 	private static final int MAX_CALC_COLOR_LEVEL = 10;
 	private static final double MIN_CALC_COLOR_K = 0.001;
-	public int amountOfRays=1;
+	public int amountOfRays = 1;
+
 	/**
 	 * constructor, sets scene
 	 * 
@@ -141,22 +142,25 @@ public class RayTracerBasic extends RayTracerBase {
 	private Double3 calcDiffusive(Double3 kD, double nl) {
 		return (kD.scale(nl > 0 ? nl : -nl));
 	}
+
 	private Double3 transparency(GeoPoint gp, LightSource lS, Vector n, double nv) {
-		List<Vector>vecs=lS.getVecs(gp.point, amountOfRays);
-		Double3 res=Double3.ZERO;
-		for(Vector v1:vecs)res=res.add(transparency(gp, lS, v1, n, nv));
-		res=res.reduce(amountOfRays);
+		List<Vector> vecs = lS.getVecs(gp.point, amountOfRays);
+		Double3 res = Double3.ZERO;
+		for (Vector v1 : vecs)
+			res = res.add(transparency(gp, lS, v1, n, nv));
+		res = res.reduce(amountOfRays);
 		return res;
 	}
+
 	/**
 	 * calculate the transparency, how much light from the light source comes to the
 	 * point
 	 * 
-	 * @param gp the point
-	 * @param lS the light source
-	 * @param lightDirection  vector to calculate transparency
-	 * @param n  normal at the point
-	 * @param nv dotproduct of n and the vector from the camera
+	 * @param gp             the point
+	 * @param lS             the light source
+	 * @param lightDirection vector to calculate transparency
+	 * @param n              normal at the point
+	 * @param nv             dotproduct of n and the vector from the camera
 	 * @return the transparency
 	 */
 	private Double3 transparency(GeoPoint gp, LightSource lS, Vector lightDirection, Vector n, double nv) {
@@ -216,6 +220,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 	/**
 	 * set amount of rays
+	 * 
 	 * @param amountOfRays
 	 */
 	public RayTracerBasic setAmountOfRays(int amountOfRays) {
