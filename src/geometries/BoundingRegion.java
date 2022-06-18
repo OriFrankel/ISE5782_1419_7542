@@ -75,4 +75,5 @@ public class BoundingRegion {
 		
 		return Math.min(maxz,Math.min(maxx, maxy))>=Math.max(0,Math.max(minz,Math.max(minx, miny)));
 	}
+	
 }
