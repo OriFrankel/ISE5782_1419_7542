@@ -17,7 +17,8 @@ public class Camera {
 	private double viewPlaneWidth, viewPlaneHeight, viewPlaneDistance;
 	private ImageWriter imageWriter;
 	private RayTracerBase rayTracer;
-
+	private int threadsCount=1;
+	private double printInterval=100;
 	/**
 	 * Constructor for camera,gets location and direction vectors
 	 * 
@@ -123,9 +124,17 @@ public class Camera {
 			throw new MissingResourceException("", "", "");
 		int nX = imageWriter.getNx();
 		int nY = imageWriter.getNy();
-		for (int i = 0; nX > i; ++i)
-			for (int j = 0; nY > j; ++j)
-				imageWriter.writePixel(i, j, castRay(i, j, nX, nY));
+		Pixel.initialize(nY, nX, printInterval);
+		while (threadsCount-- > 0) {
+		 new Thread(() -> {
+		 for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
+		 castRay(nX, nY, pixel.col, pixel.row);
+		 }).start();
+		}
+		Pixel.waitToFinish();
+		//for (int i = 0; nX > i; ++i)
+		//	for (int j = 0; nY > j; ++j)
+		//		imageWriter.writePixel(i, j, castRay(i, j, nX, nY));
 		return this;
 	}
 
@@ -158,5 +167,23 @@ public class Camera {
 
 	private Color castRay(int i, int j, int nX, int nY) {
 		return rayTracer.traceRay(constructRay(nX, nY, i, j));
+	}
+	/**
+	 * set threads number
+	 * @param i threads number
+	 * @return the object
+	 */
+	public Camera setMultithreading(int i) {
+		threadsCount=i;
+		return this;
+	}
+	/**
+	 * set Debug Print
+	 * @param d Debug Print
+	 * @return the object
+	 */
+	public Camera setDebugPrint(double d) {
+		printInterval=d;
+		return this;
 	}
 }
