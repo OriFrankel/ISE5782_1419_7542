@@ -14,7 +14,7 @@ public class BlackBoard {
 	private Point center;
 	private Vector vUp;
 	private Vector vRight;
-	private double size = 10;
+	private double size = 100;
 	private static Vector firstTry = new Vector(0, 0, 1);
 	private static Vector secondTry = new Vector(0, 1, 0);
 

@@ -1568,7 +1568,8 @@ public class TeapotTest {
 				new Triangle(pnts[529], pnts[530], pnts[470]).setEmission(color).setMaterial(mat) //
 		);
 		scene.geometries.makeBVH();
-		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point(100, 0, -100)).setKq(0.000001));
+		//scene.geometries.setUseBoundingRegion(false);
+		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point(100, 0, -100)).setKq(0.000001).setSize(100));
 
 		camera.setRayTracer(new RayTracerBasic(scene)).renderImage().printGrid(50, new Color(YELLOW)).writeToImage();
 	}

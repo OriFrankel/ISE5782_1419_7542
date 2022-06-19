@@ -60,7 +60,7 @@ public class Geometries extends Intersectable {
 			return null;
 		BoundingRegion br = geometries.get(0).getBR();
 		for (Intersectable intersectable : geometries) {
-			br = br.union(intersectable.getBoundingRegion());
+			br = br.union(intersectable.getBR());
 		}
 		return br;
 	}
@@ -103,6 +103,12 @@ public class Geometries extends Intersectable {
 		 * 
 		 * }
 		 */
+		return this;
+	}
+	public Intersectable setUseBoundingRegion(boolean b) {
+		super.setUseBoundingRegion(b);
+		for(Intersectable i:geometries)
+			i.setUseBoundingRegion(b);
 		return this;
 	}
 }
