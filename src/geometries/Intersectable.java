@@ -14,6 +14,13 @@ import primitives.*;
  *
  */
 public abstract class Intersectable {
+	private BoundingRegion bRegion = null;
+	private boolean useBoundingRegion=true;
+	/**
+	 * get bounding region of geometry/list of geometries
+	 * @return bounding region
+	 */
+	protected abstract BoundingRegion getBoundingRegion();
 	/**
 	 * pair of a geometry and point on it
 	 * 
@@ -75,6 +82,10 @@ public abstract class Intersectable {
 	 * @return list of intersection points
 	 */
 	public List<GeoPoint> findGeoIntersections(Ray ray) {
+		getBR();
+		if(bRegion!=null)
+			if(!bRegion.isThereIntersection(ray))
+				return null;
 		return findGeoIntersectionsHelper(ray);
 	}
 
@@ -93,4 +104,23 @@ public abstract class Intersectable {
 	public GeoPoint findClosestIntersection(Ray ray) {
 		return ray.findClosestGeoPoint(findGeoIntersections(ray));
 	}
+	/**
+	 * get the bounding region
+	 * @return the bounding region
+	 */
+	public BoundingRegion getBR() {
+		if (bRegion == null&&useBoundingRegion)
+			bRegion = getBoundingRegion();
+		return bRegion;
+	}
+	/**
+	 * setter for using/not using Bounding Region
+	 * @param b using/not using Bounding Region (true=using)
+	 * @return the object
+	 */
+	public Intersectable setUseBoundingRegion(boolean b) {
+		useBoundingRegion=b;
+		return this;
+	}
+	
 }

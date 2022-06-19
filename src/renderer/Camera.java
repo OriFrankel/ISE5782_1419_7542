@@ -17,8 +17,9 @@ public class Camera {
 	private double viewPlaneWidth, viewPlaneHeight, viewPlaneDistance;
 	private ImageWriter imageWriter;
 	private RayTracerBase rayTracer;
-	private int threadsCount=1;
-	private double printInterval=100;
+	private int threadsCount = 1;
+	private double printInterval = 0.1;
+
 	/**
 	 * Constructor for camera,gets location and direction vectors
 	 * 
@@ -124,14 +125,19 @@ public class Camera {
 			throw new MissingResourceException("", "", "");
 		int nX = imageWriter.getNx();
 		int nY = imageWriter.getNy();
-		Pixel.initialize(nY, nX, printInterval);
-		while (threadsCount-- > 0) {
-		 new Thread(() -> {
-		 for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
-		 imageWriter.writePixel(pixel.col, pixel.row, castRay(pixel.col, pixel.row, nX, nY));
-		 }).start();
+		if (threadsCount > 1) {
+			Pixel.initialize(nY, nX, printInterval);
+			for (int i = 0; threadsCount > i; ++i) {
+				new Thread(() -> {
+					for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
+						imageWriter.writePixel(pixel.col, pixel.row, castRay(pixel.col, pixel.row, nX, nY));
+				}).start();
+			}
+			Pixel.waitToFinish();
 		}
-		Pixel.waitToFinish();
+		else for(int i=0;nX>i;++i)
+			for(int j=0;nY>j;++j)
+				imageWriter.writePixel(j,i, castRay(j,i, nX, nY));
 		return this;
 	}
 
@@ -165,22 +171,26 @@ public class Camera {
 	private Color castRay(int i, int j, int nX, int nY) {
 		return rayTracer.traceRay(constructRay(nX, nY, i, j));
 	}
+
 	/**
 	 * set threads number
+	 * 
 	 * @param i threads number
 	 * @return the object
 	 */
 	public Camera setMultithreading(int i) {
-		threadsCount=i;
+		threadsCount = i;
 		return this;
 	}
+
 	/**
 	 * set Debug Print
+	 * 
 	 * @param d Debug Print
 	 * @return the object
 	 */
 	public Camera setDebugPrint(double d) {
-		printInterval=d;
+		printInterval = d;
 		return this;
 	}
 }
