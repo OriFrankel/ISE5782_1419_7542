@@ -15,12 +15,15 @@ import primitives.*;
  */
 public abstract class Intersectable {
 	private BoundingRegion bRegion = null;
-	private boolean useBoundingRegion=true;
+	private boolean useBoundingRegion = true;
+
 	/**
 	 * get bounding region of geometry/list of geometries
+	 * 
 	 * @return bounding region
 	 */
 	protected abstract BoundingRegion getBoundingRegion();
+
 	/**
 	 * pair of a geometry and point on it
 	 * 
@@ -54,7 +57,7 @@ public abstract class Intersectable {
 				return true;
 			if (other == null || !(other instanceof GeoPoint))
 				return false;
-			GeoPoint geoPoint=(GeoPoint)other;
+			GeoPoint geoPoint = (GeoPoint) other;
 			return geometry == geoPoint.geometry && point.equals(geoPoint.point);
 		}
 
@@ -83,8 +86,8 @@ public abstract class Intersectable {
 	 */
 	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		getBR();
-		if(bRegion!=null)
-			if(!bRegion.isThereIntersection(ray))
+		if (bRegion != null)
+			if (!bRegion.isThereIntersection(ray))
 				return null;
 		return findGeoIntersectionsHelper(ray);
 	}
@@ -96,31 +99,37 @@ public abstract class Intersectable {
 	 * @return list of intersection points
 	 */
 	protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+
 	/**
 	 * find the closest intersection of the ray
+	 * 
 	 * @param ray the ray
 	 * @return the closest intersection if there is any, else null
 	 */
 	public GeoPoint findClosestIntersection(Ray ray) {
 		return ray.findClosestGeoPoint(findGeoIntersections(ray));
 	}
+
 	/**
 	 * get the bounding region
+	 * 
 	 * @return the bounding region
 	 */
 	public BoundingRegion getBR() {
-		if (bRegion == null&&useBoundingRegion)
+		if (bRegion == null && useBoundingRegion)
 			bRegion = getBoundingRegion();
 		return bRegion;
 	}
+
 	/**
 	 * setter for using/not using Bounding Region
+	 * 
 	 * @param b using/not using Bounding Region (true=using)
 	 * @return the object
 	 */
 	public Intersectable setUseBoundingRegion(boolean b) {
-		useBoundingRegion=b;
+		useBoundingRegion = b;
 		return this;
 	}
-	
+
 }
